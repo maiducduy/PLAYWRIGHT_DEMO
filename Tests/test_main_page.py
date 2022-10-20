@@ -9,7 +9,8 @@ class Test:
         browser = await aplaywright.chromium.launch(channel="chrome")
         context = await browser.new_context()
         page = await context.new_page()
-        await page.goto(url)
+        res = await page.goto(url)  # This statement is requesting the website and waiting for the response
+        assert res.status == 200, "Response code is not 200"  # This statement is verifying the response code, if not 200, it raises an assertion
         return page
 
     @pytest.mark.asyncio
